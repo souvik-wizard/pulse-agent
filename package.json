@@ -2,10 +2,11 @@
   "name": "pulse-agent",
   "version": "1.0.0",
   "description": "Pulse Agent - Electron desktop application for endpoint monitoring and system management",
+  "author": "Souvik-Dev",
   "main": "src/main/main.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "concurrently -k \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev": "concurrently -k -s first \"npm run dev:vite\" \"npm run dev:electron\"",
     "dev:vite": "vite",
     "dev:electron": "wait-on http://localhost:5173 && electron .",
     "build": "vite build && electron-builder",

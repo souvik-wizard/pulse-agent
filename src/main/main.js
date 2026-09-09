@@ -42,7 +42,9 @@ function createWindow() {
 
   if (isDev) {
     win.loadURL('http://localhost:5173');
-    win.webContents.openDevTools({ mode: 'detach' });
+    if (process.env.DEBUG) {
+      win.webContents.openDevTools({ mode: 'bottom' });
+    }
   } else {
     win.loadFile(path.join(__dirname, '..', '..', 'dist-renderer', 'index.html'));
   }

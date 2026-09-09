@@ -80,16 +80,16 @@ export default function Overview() {
         <>
           <div className="section-title">Machine</div>
           <div className="info-grid mb-16" style={{ marginBottom: 20 }}>
-            <InfoItem label="Hostname"    value={info.hostname} />
-            <InfoItem label="Platform"   value={info.platform} />
+            <InfoItem label="Hostname" value={info.hostname} />
+            <InfoItem label="Platform" value={info.platform} />
             <InfoItem label="OS Release" value={info.release} />
             <InfoItem label="Architecture" value={info.arch} />
           </div>
 
           <div className="section-title">Hardware</div>
           <div className="info-grid mb-16" style={{ marginBottom: 20 }}>
-            <InfoItem label="CPU Count"   value={info.cpuCount} />
-            <InfoItem label="CPU Model"   value={info.cpuModel} />
+            <InfoItem label="CPU Count" value={info.cpuCount} />
+            <InfoItem label="CPU Model" value={info.cpuModel} />
             <InfoItem label="Total Memory" value={formatBytes(info.totalMemory)} />
             <InfoItem label="Free Memory" value={formatBytes(info.freeMemory)} />
             <InfoItem label="Memory Used" value={memUsedPct != null ? `${memUsedPct}%` : '—'} />
