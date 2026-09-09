@@ -1,0 +1,39 @@
+{
+  "name": "pulse-agent",
+  "version": "1.0.0",
+  "description": "Pulse Agent - Electron desktop application for endpoint monitoring and system management",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "concurrently -k \"npm run dev:vite\" \"npm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "wait-on http://localhost:5173 && electron .",
+    "build": "vite build && electron-builder",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "electron-store": "^7.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "electron": "^33.4.0",
+    "electron-builder": "^25.1.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.11",
+    "wait-on": "^8.0.3"
+  },
+  "build": {
+    "appId": "com.pulse.agent",
+    "productName": "Pulse Agent",
+    "files": [
+      "dist-renderer/**/*",
+      "src/main/**/*",
+      "src/preload/**/*",
+      "worker-script.js",
+      "update-manifest.json",
+      "node_modules/**/*"
+    ]
+  }
+}
