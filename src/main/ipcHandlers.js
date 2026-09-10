@@ -18,12 +18,12 @@ function setWindow(win) {
 }
 
 function registerHandlers() {
-  // ─── System Info ──────────────────────────────────────────────────────────
+  // System Info
   ipcMain.handle('system:getInfo', async () => {
     return getSystemInfo();
   });
 
-  // ─── Endpoints ────────────────────────────────────────────────────────────
+  // Endpoints
   ipcMain.handle('endpoints:getAll', async () => {
     return store.get('endpoints') || [];
   });
@@ -72,7 +72,7 @@ function registerHandlers() {
     return results;
   });
 
-  // ─── Worker ───────────────────────────────────────────────────────────────
+  // Worker
   ipcMain.handle('worker:start', async () => {
     const result = startWorker();
     if (result.success) {
@@ -93,7 +93,7 @@ function registerHandlers() {
     return getWorkerStatus();
   });
 
-  // ─── Logs ─────────────────────────────────────────────────────────────────
+  // Logs
   ipcMain.handle('logs:getAll', async () => {
     return readLogs();
   });
@@ -103,7 +103,7 @@ function registerHandlers() {
     return { success: true };
   });
 
-  // ─── Updates ──────────────────────────────────────────────────────────────
+  // Updates
   ipcMain.handle('update:check', async () => {
     return checkForUpdate();
   });

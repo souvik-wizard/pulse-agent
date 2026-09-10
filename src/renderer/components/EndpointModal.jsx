@@ -6,13 +6,7 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
-/**
- * EndpointModal — Modal dialog for adding or editing a TCP endpoint.
- *
- * @param {object|null} endpoint — Existing endpoint to edit, or null for adding new
- * @param {function} onSave — Callback with the saved endpoint object
- * @param {function} onClose — Callback to close the modal
- */
+// Modal dialog for adding or editing a TCP endpoint.
 export default function EndpointModal({ endpoint, onSave, onClose }) {
   const [form, setForm] = useState({
     name: endpoint?.name || '',

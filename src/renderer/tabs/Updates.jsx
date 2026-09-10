@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import UpdateBanner from '../components/UpdateBanner';
+import UpdateProgressBar from '../components/UpdateProgressBar';
 
 const api = window.electronAPI;
 
@@ -13,9 +15,6 @@ const STATE = {
   APPLYING: 'applying',
 };
 
-/**
- * Updates Tab — Fixture-based update flow with progress simulation.
- */
 export default function Updates({ appliedVersion }) {
   const [state, setState] = useState(STATE.IDLE);
   const [checkResult, setCheckResult] = useState(null);
@@ -23,7 +22,7 @@ export default function Updates({ appliedVersion }) {
   const [error, setError] = useState(null);
 
   // Listen for download progress pushed from main process
-  React.useEffect(() => {
+  useEffect(() => {
     const remove = api.onUpdateProgress((percent) => {
       setProgress(percent);
       if (percent >= 100) {
@@ -81,15 +80,7 @@ export default function Updates({ appliedVersion }) {
       </div>
 
       {/* One-time "Updated!" banner after relaunch */}
-      {appliedVersion && (
-        <div className="update-banner">
-          <div className="update-banner-icon">🎉</div>
-          <div className="update-banner-text">
-            <div className="update-banner-title">Successfully updated to v{appliedVersion}</div>
-            <div className="update-banner-sub">Pulse Agent relaunched with the new version.</div>
-          </div>
-        </div>
-      )}
+      <UpdateBanner version={appliedVersion} />
 
       {error && (
         <div style={{
@@ -149,17 +140,7 @@ export default function Updates({ appliedVersion }) {
         )}
 
         {/* Progress bar */}
-        {(state === STATE.DOWNLOADING) && (
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: 12, color: 'var(--text-secondary)' }}>
-              <span>Downloading update…</span>
-              <span className="font-mono">{progress}%</span>
-            </div>
-            <div className="progress-bar-wrap">
-              <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-        )}
+        {state === STATE.DOWNLOADING && <UpdateProgressBar progress={progress} />}
 
         {/* Actions */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>

@@ -14,18 +14,12 @@ let workerProcess = null;
 let outputLines = [];
 let mainWindow = null;
 
-/**
- * Set the main window reference so we can push events to the renderer.
- * @param {Electron.BrowserWindow} win
- */
 function setMainWindow(win) {
   mainWindow = win;
 }
 
-/**
- * Get the path to the bundled worker script.
- * Works in both dev and production (packaged) contexts.
- */
+
+// Get the path to the bundled worker-script.js.
 function getWorkerScriptPath() {
   if (app && app.isPackaged) {
     return path.join(process.resourcesPath, 'worker-script.js');
@@ -43,10 +37,6 @@ function pushLine(line) {
   }
 }
 
-/**
- * Start the worker process.
- * @returns {{ success: boolean, pid?: number, error?: string }}
- */
 function startWorker() {
   if (workerProcess) {
     return { success: false, error: 'Worker is already running.' };
@@ -90,10 +80,6 @@ function startWorker() {
   return { success: true, pid };
 }
 
-/**
- * Stop the worker process gracefully.
- * @returns {{ success: boolean, error?: string }}
- */
 function stopWorker() {
   if (!workerProcess) {
     return { success: false, error: 'No worker is running.' };
@@ -112,10 +98,6 @@ function stopWorker() {
   return { success: true };
 }
 
-/**
- * Get current worker status.
- * @returns {{ running: boolean, pid: number|null, lines: string[] }}
- */
 function getStatus() {
   return {
     running: workerProcess !== null,
@@ -124,9 +106,7 @@ function getStatus() {
   };
 }
 
-/**
- * Kill the worker unconditionally (called on app quit).
- */
+// Kill the worker unconditionally (called on app quit).
 function killWorker() {
   if (workerProcess) {
     try { workerProcess.kill('SIGKILL'); } catch (_) {}

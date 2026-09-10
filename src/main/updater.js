@@ -54,8 +54,6 @@ function checkForUpdate() {
  * Simulate downloading the update.
  * Sends progress events (0–100) via the provided callback.
  * Writes a dummy file to userData.
- * @param {function} onProgress — called with (percent: number)
- * @returns {Promise<void>}
  */
 function downloadUpdate(onProgress) {
   return new Promise((resolve, reject) => {
@@ -91,9 +89,7 @@ function downloadUpdate(onProgress) {
   });
 }
 
-/**
- * Apply the update: save pendingVersion, relaunch the app.
- */
+//Apply the update: save pendingVersion, relaunch the app.
 function applyUpdate() {
   const manifest = readManifest();
   store.set('pendingVersion', manifest.version);
@@ -105,7 +101,6 @@ function applyUpdate() {
 /**
  * Check if the app just updated (pendingVersion in store).
  * Returns the applied version and clears the flag.
- * @returns {string|null} appliedVersion or null
  */
 function consumePendingVersion() {
   const pending = store.get('pendingVersion');

@@ -1,36 +1,10 @@
 import { useEffect, useState } from 'react';
 import EndpointModal from '../components/EndpointModal';
+import StatusBadge from '../components/StatusBadge';
+import LatencyCell from '../components/LatencyCell';
 
 const api = window.electronAPI;
 
-function StatusBadge({ status }) {
-  if (status === 'checking') {
-    return (
-      <span className="badge badge-checking">
-        <span className="spinner" style={{ width: 10, height: 10 }} />
-        Checking
-      </span>
-    );
-  }
-  const cls = status === 'online' ? 'badge-online'
-    : status === 'unreachable' ? 'badge-unreachable'
-      : 'badge-unknown';
-  const label = status === 'online' ? '● Online'
-    : status === 'unreachable' ? '✕ Unreachable'
-      : '— Unknown';
-  return <span className={`badge ${cls}`}>{label}</span>;
-}
-
-function LatencyCell({ status, latency }) {
-  if (status !== 'online' || latency == null) return <span className="text-muted">—</span>;
-  const cls = latency < 80 ? 'fast' : latency < 200 ? 'med' : 'slow';
-  return <span className={`latency ${cls}`}>{latency} ms</span>;
-}
-
-
-/**
- * Endpoints Tab — TCP health check table with add/edit/delete/check actions.
- */
 export default function Endpoints() {
   const [endpoints, setEndpoints] = useState([]);
   const [checkingIds, setCheckingIds] = useState(new Set());

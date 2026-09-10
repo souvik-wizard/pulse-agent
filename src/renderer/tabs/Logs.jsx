@@ -1,22 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import LogEntry from '../components/LogEntry';
 
 const api = window.electronAPI;
 
-function formatTime(iso) {
-  try {
-    const d = new Date(iso);
-    return d.toLocaleString(undefined, {
-      month: 'short', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
-    });
-  } catch {
-    return iso;
-  }
-}
-
-/**
- * Logs Tab — Reads JSON-lines log file and displays entries newest-first.
- */
 export default function Logs() {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -82,11 +68,7 @@ export default function Logs() {
 
       <div className="log-list" id="log-list">
         {logs.map((entry, i) => (
-          <div key={i} className="log-entry">
-            <span className="log-time">{formatTime(entry.time)}</span>
-            <span className={`log-action log-action-${entry.action}`}>{entry.action}</span>
-            <span className="log-message">{entry.message}</span>
-          </div>
+          <LogEntry key={i} entry={entry} />
         ))}
       </div>
     </div>

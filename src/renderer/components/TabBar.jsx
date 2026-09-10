@@ -1,4 +1,3 @@
-import React from 'react';
 
 const TABS = [
   { id: 'overview',   label: 'Overview',   icon: '🖥️' },
@@ -8,9 +7,7 @@ const TABS = [
   { id: 'logs',       label: 'Logs',       icon: '📋' },
 ];
 
-/**
- * TabBar — Horizontal tab navigation strip.
- */
+// Horizontal tab navigation strip.
 export default function TabBar({ activeTab, onTabChange }) {
   return (
     <nav className="tab-bar" role="tablist">

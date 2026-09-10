@@ -1,18 +1,9 @@
-/**
- * endpointChecker.js — TCP health checks using Node net.Socket.
- * All validation and checking happens here in the main process.
- * The renderer never touches net or raw sockets.
- */
+// TCP health checks using Node net.Socket module.
 
 const net = require('net');
 
 const TIMEOUT_MS = 2000;
 
-/**
- * Validate endpoint fields.
- * @param {object} endpoint
- * @returns {{ valid: boolean, errors: string[] }}
- */
 function validateEndpoint(endpoint) {
   const errors = [];
   if (!endpoint.host || String(endpoint.host).trim() === '') {
@@ -25,12 +16,6 @@ function validateEndpoint(endpoint) {
   return { valid: errors.length === 0, errors };
 }
 
-/**
- * Perform a TCP check on a single endpoint.
- * @param {string} host
- * @param {number} port
- * @returns {Promise<{ status: 'online'|'unreachable', latency: number|null }>}
- */
 function checkEndpoint(host, port) {
   return new Promise((resolve) => {
     const start = Date.now();

@@ -12,17 +12,17 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  // ─── System Info ──────────────────────────────────────────────────────────
+  // System Info
   getSystemInfo: () => ipcRenderer.invoke('system:getInfo'),
 
-  // ─── Endpoints ────────────────────────────────────────────────────────────
+  // Endpoints
   getAllEndpoints: () => ipcRenderer.invoke('endpoints:getAll'),
   saveEndpoints: (endpoints) => ipcRenderer.invoke('endpoints:save', endpoints),
   validateEndpoint: (endpoint) => ipcRenderer.invoke('endpoints:validate', endpoint),
   checkEndpoint: (endpoint) => ipcRenderer.invoke('endpoints:check', endpoint),
   checkAllEndpoints: (endpoints) => ipcRenderer.invoke('endpoints:checkAll', endpoints),
 
-  // ─── Worker ───────────────────────────────────────────────────────────────
+  // Worker
   startWorker: () => ipcRenderer.invoke('worker:start'),
   stopWorker: () => ipcRenderer.invoke('worker:stop'),
   getWorkerStatus: () => ipcRenderer.invoke('worker:status'),
@@ -40,11 +40,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => ipcRenderer.removeListener('worker:stopped', listener);
   },
 
-  // ─── Logs ─────────────────────────────────────────────────────────────────
+  // Logs
   getAllLogs: () => ipcRenderer.invoke('logs:getAll'),
   openLogFolder: () => ipcRenderer.invoke('logs:openFolder'),
 
-  // ─── Updates ──────────────────────────────────────────────────────────────
+  // Updates
   checkUpdate: () => ipcRenderer.invoke('update:check'),
   downloadUpdate: () => ipcRenderer.invoke('update:download'),
   applyUpdate: () => ipcRenderer.invoke('update:apply'),

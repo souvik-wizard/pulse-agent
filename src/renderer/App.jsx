@@ -9,9 +9,6 @@ import Logs from './tabs/Logs';
 
 const api = window.electronAPI;
 
-/**
- * App — Root component. Handles tab routing and update-applied banner.
- */
 export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [appVersion, setAppVersion] = useState('1.0.0');

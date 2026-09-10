@@ -1,11 +1,6 @@
 /**
  * main.js — Electron main process entry point.
- *
- * Security:
- *   - contextIsolation: true
- *   - nodeIntegration: false
- *   - Renderer is loaded from Vite dev server (dev) or dist-renderer (prod).
- *   - All Node.js operations happen here, exposed via IPC + preload only.
+ * All Node.js operations happen here, exposed via IPC + preload only.
  */
 
 const { app, BrowserWindow } = require('electron');

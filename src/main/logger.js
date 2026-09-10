@@ -21,12 +21,7 @@ function ensureLogDir() {
   return logFilePath;
 }
 
-/**
- * Append a log entry.
- * @param {string} action — One of the defined action constants.
- * @param {string} message — Human-readable description.
- * @param {object} [extra] — Optional extra fields.
- */
+// Append a log entry.
 function log(action, message, extra = {}) {
   const entry = {
     time: new Date().toISOString(),
@@ -38,10 +33,7 @@ function log(action, message, extra = {}) {
   fs.appendFileSync(filePath, JSON.stringify(entry) + '\n', 'utf8');
 }
 
-/**
- * Read all log entries, newest first.
- * @returns {object[]}
- */
+// Read all log entries, newest first.
 function readAll() {
   const filePath = ensureLogDir();
   if (!fs.existsSync(filePath)) return [];
@@ -57,9 +49,7 @@ function readAll() {
   return entries.reverse();
 }
 
-/**
- * Open the log folder in the OS file explorer.
- */
+// Open the log folder in the OS file explorer.
 async function openLogFolder() {
   const filePath = ensureLogDir();
   await shell.openPath(path.dirname(filePath));

@@ -1,9 +1,6 @@
 import React from 'react';
 
-/**
- * Header — App name, version, and online/offline indicator.
- * Uses navigator.onLine for the initial value and listens for changes.
- */
+// Header — App name, version, and online/offline indicator.
 export default function Header({ version }) {
   const [online, setOnline] = React.useState(navigator.onLine);
 

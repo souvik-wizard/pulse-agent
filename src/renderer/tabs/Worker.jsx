@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import WorkerStatusBar from '../components/WorkerStatusBar';
+import WorkerConsole from '../components/WorkerConsole';
 
 const api = window.electronAPI;
 const MAX_LINES = 50;
 
-/**
- * Worker Tab — Start/stop the bundled worker, stream stdout, display last 50 lines.
- */
 export default function Worker() {
   const [running, setRunning] = useState(false);
   const [pid, setPid] = useState(null);
@@ -112,34 +111,18 @@ export default function Worker() {
         </div>
       )}
 
-      <div className="worker-status-bar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div className={`online-dot ${running ? 'online' : 'offline'}`} />
-          <span style={{ fontSize: 13, fontWeight: 600, color: running ? 'var(--success)' : 'var(--text-muted)' }}>
-            {running ? 'Running' : 'Stopped'}
-          </span>
-        </div>
-        {pid != null && (
-          <div className="worker-pid-badge">PID: {pid}</div>
-        )}
-        <div className="toolbar-spacer" />
-        <span className="text-muted" style={{ fontSize: 12 }}>
-          Showing last {Math.min(lines.length, MAX_LINES)} / {MAX_LINES} lines
-        </span>
-      </div>
+      <WorkerStatusBar
+        running={running}
+        pid={pid}
+        lineCount={lines.length}
+        maxLines={MAX_LINES}
+      />
 
-      <div className="section-title">stdout output</div>
-      <div className="console-output" ref={consoleRef} id="worker-console">
-        {lines.length === 0 ? (
-          <div className="console-empty">
-            {running ? 'Waiting for output…' : 'Start the worker to see output here.'}
-          </div>
-        ) : (
-          lines.map((line, i) => (
-            <div key={i} className="console-line">{line}</div>
-          ))
-        )}
-      </div>
+      <WorkerConsole
+        lines={lines}
+        running={running}
+        consoleRef={consoleRef}
+      />
     </div>
   );
 }

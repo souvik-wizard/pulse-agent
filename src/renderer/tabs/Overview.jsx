@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import InfoItem from '../components/InfoItem';
 
 const api = window.electronAPI;
 
@@ -17,18 +18,6 @@ function formatUptime(seconds) {
   return `${h}h ${m}m`;
 }
 
-function InfoItem({ label, value }) {
-  return (
-    <div className="info-item">
-      <div className="info-label">{label}</div>
-      <div className="info-value">{value ?? '—'}</div>
-    </div>
-  );
-}
-
-/**
- * Overview Tab — Displays machine info fetched via IPC.
- */
 export default function Overview() {
   const [info, setInfo] = useState(null);
   const [loading, setLoading] = useState(false);
