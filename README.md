@@ -159,7 +159,7 @@ pulse-agent/
 2. Click **Check for Update** — the app reports version `1.0.0` and a newer `1.1.0` is available.
 3. Release notes are displayed.
 4. Click **Download Update** — a progress bar animates 0 → 100%.
-5. Click **Apply & Relaunch** — the app relaunches.
+5. Click **Apply & Relaunch** — the app relaunches.(NOTE: This will only work with the packaged version, not with the local dev version)
 6. After relaunch, a green "Successfully updated to v1.1.0" banner appears once in the Updates tab.
 
 > The app's `package.json` version stays `1.0.0`;
