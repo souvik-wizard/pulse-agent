@@ -44,10 +44,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getAllLogs: () => ipcRenderer.invoke('logs:getAll'),
   openLogFolder: () => ipcRenderer.invoke('logs:openFolder'),
 
-  // ─── Store (generic, limited) ─────────────────────────────────────────────
-  storeGet: (key) => ipcRenderer.invoke('store:get', key),
-  storeSet: (key, value) => ipcRenderer.invoke('store:set', key, value),
-
   // ─── Updates ──────────────────────────────────────────────────────────────
   checkUpdate: () => ipcRenderer.invoke('update:check'),
   downloadUpdate: () => ipcRenderer.invoke('update:download'),

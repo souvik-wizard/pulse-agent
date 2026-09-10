@@ -1,6 +1,6 @@
 # ⚡ Pulse Agent
 
-A small, clean Electron + React desktop application for monitoring TCP endpoints, managing a background worker process, and performing simple app updates — all while demonstrating secure Electron IPC architecture.
+A small, Electron + React desktop application for monitoring TCP endpoints, managing a background worker process, and performing simple app updates — all while demonstrating secure Electron IPC architecture.
 
 ---
 
@@ -34,7 +34,7 @@ A small, clean Electron + React desktop application for monitoring TCP endpoints
 ## 📋 Prerequisites
 
 - **Node.js** ≥ 18 (includes npm)
-- **Windows / macOS / Linux** (tested on Windows)
+- **Windows / macOS / Linux** (tested on Windows 11)
 
 ---
 
@@ -49,10 +49,12 @@ cd pulse-agent
 npm install
 
 # 3. Start in development mode
+npm start
+# or
 npm run dev
 ```
 
-`npm run dev` concurrently starts:
+`npm start` / `npm run dev` concurrently starts:
 1. **Vite dev server** on `http://localhost:5173` (React renderer)
 2. **Electron** (waits for Vite to be ready, then opens the window)
 
@@ -89,8 +91,9 @@ pulse-agent/
 │       ├── App.jsx           # Tab routing, header, update banner
 │       ├── index.css         # Global dark theme styles
 │       ├── components/
-│       │   ├── Header.jsx    # App name, version, online indicator
-│       │   └── TabBar.jsx    # Tab navigation
+│       │   ├── Header.jsx        # App name, version, online indicator
+│       │   ├── TabBar.jsx        # Tab navigation
+│       │   └── EndpointModal.jsx # Add / Edit endpoint modal dialog
 │       └── tabs/
 │           ├── Overview.jsx  # Machine info
 │           ├── Endpoints.jsx # TCP endpoint table
@@ -159,7 +162,7 @@ pulse-agent/
 5. Click **Apply & Relaunch** — the app relaunches.
 6. After relaunch, a green "Successfully updated to v1.1.0" banner appears once in the Updates tab.
 
-> The app's `package.json` version stays `1.0.0`; the pending version is saved to `electron-store` and consumed once on the next launch.
+> The app's `package.json` version stays `1.0.0`;
 
 ---
 
@@ -168,8 +171,6 @@ pulse-agent/
 | Platform | Path |
 |----------|------|
 | Windows  | `%APPDATA%\pulse-agent\logs\agent.log` |
-| macOS    | `~/Library/Application Support/pulse-agent/logs/agent.log` |
-| Linux    | `~/.config/pulse-agent/logs/agent.log` |
 
 Each line is a JSON object:
 ```json
@@ -184,4 +185,6 @@ Each line is a JSON object:
 npm run build
 ```
 
-This runs `vite build` then `electron-builder` to produce a distributable in `dist/`.
+This runs `vite build` then `electron-builder` to produce:
+- **Installer**: `dist/Pulse Agent Setup 1.0.0.exe` (NSIS setup wizard)
+- **Standalone App**: `dist/win-unpacked/Pulse Agent.exe` (portable unpacked directory)

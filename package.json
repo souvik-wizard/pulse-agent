@@ -9,8 +9,7 @@
     "dev": "concurrently -k -s first \"npm run dev:vite\" \"npm run dev:electron\"",
     "dev:vite": "vite",
     "dev:electron": "wait-on http://localhost:5173 && electron .",
-    "build": "vite build && electron-builder",
-    "preview": "vite preview"
+    "build": "vite build && electron-builder"
   },
   "dependencies": {
     "electron-store": "^7.0.3"

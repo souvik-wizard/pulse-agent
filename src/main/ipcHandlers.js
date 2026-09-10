@@ -7,8 +7,7 @@ const { ipcMain } = require('electron');
 const { getSystemInfo } = require('./systemInfo');
 const { validateEndpoint, checkEndpoint } = require('./endpointChecker');
 const { startWorker, stopWorker, getStatus: getWorkerStatus } = require('./workerManager');
-const { readAll: readLogs, openLogFolder } = require('./logger');
-const { log, ACTIONS } = require('./logger');
+const { log, readAll: readLogs, openLogFolder, ACTIONS } = require('./logger');
 const store = require('./store');
 const { checkForUpdate, downloadUpdate, applyUpdate } = require('./updater');
 
@@ -101,16 +100,6 @@ function registerHandlers() {
 
   ipcMain.handle('logs:openFolder', async () => {
     await openLogFolder();
-    return { success: true };
-  });
-
-  // ─── Store (generic) ──────────────────────────────────────────────────────
-  ipcMain.handle('store:get', async (_event, key) => {
-    return store.get(key);
-  });
-
-  ipcMain.handle('store:set', async (_event, key, value) => {
-    store.set(key, value);
     return { success: true };
   });
 
