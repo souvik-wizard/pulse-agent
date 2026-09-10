@@ -31,9 +31,14 @@
       "dist-renderer/**/*",
       "src/main/**/*",
       "src/preload/**/*",
-      "worker-script.js",
       "update-manifest.json",
       "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "worker-script.js",
+        "to": "worker-script.js"
+      }
     ]
   }
 }
