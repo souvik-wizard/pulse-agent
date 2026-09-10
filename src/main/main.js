@@ -20,7 +20,7 @@ function createWindow() {
     minWidth: 800,
     minHeight: 560,
     title: 'Pulse Agent',
-    backgroundColor: '#0f1117',
+    backgroundColor: '#f8fafc',
     webPreferences: {
       preload: path.join(__dirname, '..', 'preload', 'preload.js'),
       contextIsolation: true,
