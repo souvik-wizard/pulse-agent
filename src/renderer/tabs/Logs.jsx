@@ -67,6 +67,13 @@ export default function Logs() {
       )}
 
       <div className="log-list" id="log-list">
+        {logs.length > 0 && (
+          <div className="log-header" role="row">
+            <span>Time</span>
+            <span>Action</span>
+            <span>Message</span>
+          </div>
+        )}
         {logs.map((entry, i) => (
           <LogEntry key={i} entry={entry} />
         ))}
